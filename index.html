@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Second Life — Marketplace Barang Bekas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span class="logo-dot"></span>Second Life</div>
+  <ul class="nav-links">
+    <li><a href="#listing">Listing</a></li>
+    <li><a href="#cari">Cari</a></li>
+    <li><a href="#dampak">Dampak</a></li>
+    <li><a href="#jual">Jual</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('jual').scrollIntoView({behavior:'smooth'})">+ Jual Barang</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero fade-up">
+  <div>
+    <span class="hero-badge">🌍 SDG 12 · Responsible Consumption</span>
+    <h1>Barang Lama,<br><em>Cerita Baru</em></h1>
+    <p>Marketplace barang bekas yang merayakan sejarah setiap benda. Beli, jual, dan jadikan konsumsimu lebih bertanggung jawab.</p>
+    <div class="hero-btns">
+      <button class="btn btn-teal" onclick="document.getElementById('listing').scrollIntoView({behavior:'smooth'})">🛍️ Lihat Barang</button>
+      <button class="btn btn-outline" onclick="document.getElementById('dampak').scrollIntoView({behavior:'smooth'})">📊 Lihat Dampak</button>
+    </div>
+  </div>
+  <div class="hero-stats fade-up delay-2">
+    <div class="stat-card amber">
+      <div class="stat-num" id="stat-item">0</div>
+      <div class="stat-label">barang diselamatkan</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-num" id="stat-co2">0</div>
+      <div class="stat-label">kg CO₂ dicegah</div>
+    </div>
+    <div class="stat-card coral">
+      <div class="stat-num" id="stat-seller">0</div>
+      <div class="stat-label">penjual aktif</div>
+    </div>
+    <div class="stat-card purple">
+      <div class="stat-num" id="stat-saved">0</div>
+      <div class="stat-label">juta rupiah hemat</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- FITUR 1: PRODUCT LISTING -->
+<div class="section" id="listing">
+  <div class="section-header">
+    <h2 class="section-title">Temukan Barang</h2>
+    <span class="section-badge badge-amber">Fitur 1 — Listing & Storytelling</span>
+  </div>
+  <div class="filter-tabs" id="cat-tabs">
+    <button class="filter-tab active" onclick="filterCat('semua', this)">Semua</button>
+    <button class="filter-tab" onclick="filterCat('elektronik', this)">📱 Elektronik</button>
+    <button class="filter-tab" onclick="filterCat('pakaian', this)">👕 Pakaian</button>
+    <button class="filter-tab" onclick="filterCat('furnitur', this)">🪑 Furnitur</button>
+    <button class="filter-tab" onclick="filterCat('buku', this)">📚 Buku</button>
+  </div>
+  <div class="product-grid" id="product-grid"></div>
+</div>
+
+<hr class="divider" />
+
+<!-- FITUR 2: SEARCH & FILTER -->
+<div class="section" id="cari">
+  <div class="section-header">
+    <h2 class="section-title">Cari Barang</h2>
+    <span class="section-badge badge-purple">Fitur 2 — Search & Filter</span>
+  </div>
+  <div class="search-bar-wrap">
+    <input type="text" class="search-input" id="search-input" placeholder="Cari nama atau deskripsi barang..." oninput="runSearch()" />
+    <select class="sort-select" id="sort-select" onchange="runSearch()">
+      <option value="terbaru">Terbaru</option>
+      <option value="termurah">Termurah</option>
+      <option value="termahal">Termahal</option>
+      <option value="dampak">Dampak Tertinggi</option>
+    </select>
+  </div>
+  <div class="filter-row">
+    <div class="filter-group">
+      <span class="filter-label">Harga maks</span>
+      <div class="range-wrap">
+        <input type="range" min="10000" max="1000000" step="10000" value="1000000" id="price-range" oninput="updatePriceLabel();runSearch()" />
+        <span class="range-val" id="price-label">Rp 1.000.000</span>
+      </div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Kondisi</span>
+      <div class="cond-btns">
+        <button class="cond-btn active" data-cond="semua" onclick="toggleCond('semua',this)">Semua</button>
+        <button class="cond-btn" data-cond="Bagus" onclick="toggleCond('Bagus',this)">Bagus</button>
+        <button class="cond-btn" data-cond="Layak" onclick="toggleCond('Layak',this)">Layak</button>
+        <button class="cond-btn" data-cond="Bekas" onclick="toggleCond('Bekas',this)">Bekas</button>
+      </div>
+    </div>
+  </div>
+  <div class="product-grid" id="search-grid"></div>
+  <div class="search-empty" id="search-empty" style="display:none;">Tidak ada barang yang cocok 🙁</div>
+</div>
+
+<hr class="divider" />
+
+<!-- FITUR 3: IMPACT TRACKER -->
+<div class="section" id="dampak">
+  <div class="section-header">
+    <h2 class="section-title">Dampak Komunitas</h2>
+    <span class="section-badge badge-teal">Fitur 3 — Impact Tracker</span>
+  </div>
+  <div class="impact-hero">
+    <h3>Bersama, kita sudah buat perbedaan 🌱</h3>
+    <p>Setiap barang yang dijual di Second Life adalah satu barang yang tidak berakhir di TPA. Ini dampak nyata komunitas kita.</p>
+    <div class="impact-grid">
+      <div class="impact-stat">
+        <div class="impact-stat-num">1.247</div>
+        <div class="impact-stat-label">barang diselamatkan</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-stat-num">3.8 ton</div>
+        <div class="impact-stat-label">CO₂ tidak terbuang</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-stat-num">94 juta L</div>
+        <div class="impact-stat-label">air hemat (produksi)</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-stat-num">412</div>
+        <div class="impact-stat-label">penjual aktif</div>
+      </div>
+    </div>
+  </div>
+  <div class="personal-calc">
+    <h4>🧮 Kalau aku ikut berkontribusi...</h4>
+    <div class="calc-slider-row">
+      <label>Barang yang kamu jual</label>
+      <input type="range" min="1" max="50" step="1" value="5" id="item-slider" oninput="calcPersonal()" />
+      <span class="calc-val" id="item-val">5 barang</span>
+    </div>
+    <div class="calc-slider-row">
+      <label>Rata-rata berat (kg)</label>
+      <input type="range" min="0.1" max="20" step="0.1" value="1" id="weight-slider" oninput="calcPersonal()" />
+      <span class="calc-val" id="weight-val">1.0 kg</span>
+    </div>
+    <div class="calc-results">
+      <div class="calc-result-card amber">
+        <div class="calc-result-num" id="res-co2">15.0</div>
+        <div class="calc-result-label">kg CO₂ dicegah</div>
+      </div>
+      <div class="calc-result-card teal">
+        <div class="calc-result-num" id="res-water">375</div>
+        <div class="calc-result-label">liter air hemat</div>
+      </div>
+      <div class="calc-result-card purple">
+        <div class="calc-result-num" id="res-waste">5</div>
+        <div class="calc-result-label">kg sampah dicegah</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- FITUR 4: JUAL BARANG -->
+<div class="section" id="jual">
+  <div class="section-header">
+    <h2 class="section-title">Jual Barangmu</h2>
+    <span class="section-badge badge-coral">Fitur 4 — Form Simulasi</span>
+  </div>
+  <div class="form-steps" id="form-steps">
+    <div class="form-step-dot active" id="step-1-dot"><span class="step-num">1</span> Info Barang</div>
+    <div class="form-step-dot" id="step-2-dot"><span class="step-num">2</span> Kondisi</div>
+    <div class="form-step-dot" id="step-3-dot"><span class="step-num">3</span> Cerita</div>
+    <div class="form-step-dot" id="step-4-dot"><span class="step-num">4</span> Harga</div>
+  </div>
+  <div class="form-grid">
+    <div id="form-container">
+      <!-- Step 1 -->
+      <div class="form-panel" id="step-1">
+        <div class="form-field">
+          <label>Nama Barang *</label>
+          <input type="text" id="f-nama" placeholder="mis. Laptop Asus 2019" oninput="updatePreview()" />
+        </div>
+        <div class="form-field">
+          <label>Kategori *</label>
+          <select id="f-cat" onchange="updatePreview()">
+            <option value="">-- Pilih kategori --</option>
+            <option value="elektronik">📱 Elektronik</option>
+            <option value="pakaian">👕 Pakaian</option>
+            <option value="furnitur">🪑 Furnitur</option>
+            <option value="buku">📚 Buku</option>
+          </select>
+        </div>
+        <button class="submit-btn" onclick="nextStep(2)">Lanjut →</button>
+      </div>
+      <!-- Step 2 -->
+      <div class="form-panel" id="step-2" style="display:none;">
+        <div class="form-field">
+          <label>Kondisi Barang *</label>
+          <div class="kondisi-group">
+            <input type="radio" name="kondisi" id="k-bagus" value="Bagus" class="kondisi-radio" onchange="updatePreview()" />
+            <label for="k-bagus" class="kondisi-label">✨ Bagus</label>
+            <input type="radio" name="kondisi" id="k-layak" value="Layak" class="kondisi-radio" onchange="updatePreview()" />
+            <label for="k-layak" class="kondisi-label">👍 Layak</label>
+            <input type="radio" name="kondisi" id="k-bekas" value="Bekas" class="kondisi-radio" onchange="updatePreview()" />
+            <label for="k-bekas" class="kondisi-label">🔧 Bekas</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <button class="btn btn-outline" onclick="prevStep(1)" style="flex:1;">← Kembali</button>
+          <button class="submit-btn" onclick="nextStep(3)" style="flex:2;margin:0;">Lanjut →</button>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="form-panel" id="step-3" style="display:none;">
+        <div class="form-field">
+          <label>Cerita Barang *</label>
+          <textarea id="f-story" placeholder="Barang ini sudah menemani aku selama 3 tahun..." oninput="updatePreview()"></textarea>
+        </div>
+        <div class="form-row">
+          <button class="btn btn-outline" onclick="prevStep(2)" style="flex:1;">← Kembali</button>
+          <button class="submit-btn" onclick="nextStep(4)" style="flex:2;margin:0;">Lanjut →</button>
+        </div>
+      </div>
+      <!-- Step 4 -->
+      <div class="form-panel" id="step-4" style="display:none;">
+        <div class="form-field">
+          <label>Harga (Rp) *</label>
+          <input type="number" id="f-harga" placeholder="150000" min="1000" oninput="updatePreview()" />
+        </div>
+        <div class="form-row">
+          <button class="btn btn-outline" onclick="prevStep(3)" style="flex:1;">← Kembali</button>
+          <button class="submit-btn" onclick="submitForm()" style="flex:2;margin:0;">🚀 Listing Sekarang!</button>
+        </div>
+      </div>
+      <!-- Success -->
+      <div class="success-panel" id="success-panel">
+        <div class="success-icon">🎉</div>
+        <h3>Barangmu sudah live!</h3>
+        <p>Terima kasih sudah berkontribusi pada ekosistem yang lebih berkelanjutan.</p>
+        <div class="success-impacts" id="success-impacts"></div>
+        <button class="btn btn-teal" style="margin-top:1.5rem;" onclick="resetForm()">+ Jual Barang Lagi</button>
+      </div>
+    </div>
+    <!-- PREVIEW -->
+    <div>
+      <div class="preview-label">Preview kartu produk</div>
+      <div class="preview-card" id="preview-card">
+        <div class="preview-empty">Isi form untuk melihat preview kartu produk kamu ✍️</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>Second Life Marketplace</strong></p>
+  <p>Dibuat untuk SDG 12 — Responsible Consumption & Production · Malang, Indonesia</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
