@@ -4,268 +4,215 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Second Life — Marketplace Barang Bekas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body data-page="home">
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo"><span class="logo-dot"></span>Second Life</div>
-  <ul class="nav-links">
-    <li><a href="#listing">Listing</a></li>
-    <li><a href="#cari">Cari</a></li>
-    <li><a href="#dampak">Dampak</a></li>
-    <li><a href="#jual">Jual</a></li>
-  </ul>
-  <button class="nav-cta" onclick="document.getElementById('jual').scrollIntoView({behavior:'smooth'})">+ Jual Barang</button>
-</nav>
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-dot"></span>Second Life
+    </a>
+    <ul class="nav-links">
+      <li><a href="listing.html" class="nav-link" data-page="listing">Temukan Barang</a></li>
+      <li><a href="search.html"  class="nav-link" data-page="search">Cari Barang</a></li>
+      <li><a href="dampak.html"  class="nav-link" data-page="dampak">Dampak</a></li>
+      <li><a href="kalkulator.html" class="nav-link" data-page="kalkulator">Kalkulator</a></li>
+      <li><a href="tentang.html" class="nav-link" data-page="tentang">Tentang</a></li>
+    </ul>
+    <a href="jual.html" class="nav-cta">+ Jual Barang</a>
+  </nav>
 
-<!-- HERO -->
-<div class="hero fade-up">
-  <div>
-    <span class="hero-badge">🌍 SDG 12 · Responsible Consumption</span>
-    <h1>Barang Lama,<br><em>Cerita Baru</em></h1>
-    <p>Marketplace barang bekas yang merayakan sejarah setiap benda. Beli, jual, dan jadikan konsumsimu lebih bertanggung jawab.</p>
-    <div class="hero-btns">
-      <button class="btn btn-teal" onclick="document.getElementById('listing').scrollIntoView({behavior:'smooth'})">🛍️ Lihat Barang</button>
-      <button class="btn btn-outline" onclick="document.getElementById('dampak').scrollIntoView({behavior:'smooth'})">📊 Lihat Dampak</button>
-    </div>
-  </div>
-  <div class="hero-stats fade-up delay-2">
-    <div class="stat-card amber">
-      <div class="stat-num" id="stat-item">0</div>
-      <div class="stat-label">barang diselamatkan</div>
-    </div>
-    <div class="stat-card teal">
-      <div class="stat-num" id="stat-co2">0</div>
-      <div class="stat-label">kg CO₂ dicegah</div>
-    </div>
-    <div class="stat-card coral">
-      <div class="stat-num" id="stat-seller">0</div>
-      <div class="stat-label">penjual aktif</div>
-    </div>
-    <div class="stat-card purple">
-      <div class="stat-num" id="stat-saved">0</div>
-      <div class="stat-label">juta rupiah hemat</div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider" />
-
-<!-- FITUR 1: PRODUCT LISTING -->
-<div class="section" id="listing">
-  <div class="section-header">
-    <h2 class="section-title">Temukan Barang</h2>
-    <span class="section-badge badge-amber">Fitur 1 — Listing & Storytelling</span>
-  </div>
-  <div class="filter-tabs" id="cat-tabs">
-    <button class="filter-tab active" onclick="filterCat('semua', this)">Semua</button>
-    <button class="filter-tab" onclick="filterCat('elektronik', this)">📱 Elektronik</button>
-    <button class="filter-tab" onclick="filterCat('pakaian', this)">👕 Pakaian</button>
-    <button class="filter-tab" onclick="filterCat('furnitur', this)">🪑 Furnitur</button>
-    <button class="filter-tab" onclick="filterCat('buku', this)">📚 Buku</button>
-  </div>
-  <div class="product-grid" id="product-grid"></div>
-</div>
-
-<hr class="divider" />
-
-<!-- FITUR 2: SEARCH & FILTER -->
-<div class="section" id="cari">
-  <div class="section-header">
-    <h2 class="section-title">Cari Barang</h2>
-    <span class="section-badge badge-purple">Fitur 2 — Search & Filter</span>
-  </div>
-  <div class="search-bar-wrap">
-    <input type="text" class="search-input" id="search-input" placeholder="Cari nama atau deskripsi barang..." oninput="runSearch()" />
-    <select class="sort-select" id="sort-select" onchange="runSearch()">
-      <option value="terbaru">Terbaru</option>
-      <option value="termurah">Termurah</option>
-      <option value="termahal">Termahal</option>
-      <option value="dampak">Dampak Tertinggi</option>
-    </select>
-  </div>
-  <div class="filter-row">
-    <div class="filter-group">
-      <span class="filter-label">Harga maks</span>
-      <div class="range-wrap">
-        <input type="range" min="10000" max="1000000" step="10000" value="1000000" id="price-range" oninput="updatePriceLabel();runSearch()" />
-        <span class="range-val" id="price-label">Rp 1.000.000</span>
-      </div>
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">Kondisi</span>
-      <div class="cond-btns">
-        <button class="cond-btn active" data-cond="semua" onclick="toggleCond('semua',this)">Semua</button>
-        <button class="cond-btn" data-cond="Bagus" onclick="toggleCond('Bagus',this)">Bagus</button>
-        <button class="cond-btn" data-cond="Layak" onclick="toggleCond('Layak',this)">Layak</button>
-        <button class="cond-btn" data-cond="Bekas" onclick="toggleCond('Bekas',this)">Bekas</button>
-      </div>
-    </div>
-  </div>
-  <div class="product-grid" id="search-grid"></div>
-  <div class="search-empty" id="search-empty" style="display:none;">Tidak ada barang yang cocok 🙁</div>
-</div>
-
-<hr class="divider" />
-
-<!-- FITUR 3: IMPACT TRACKER -->
-<div class="section" id="dampak">
-  <div class="section-header">
-    <h2 class="section-title">Dampak Komunitas</h2>
-    <span class="section-badge badge-teal">Fitur 3 — Impact Tracker</span>
-  </div>
-  <div class="impact-hero">
-    <h3>Bersama, kita sudah buat perbedaan 🌱</h3>
-    <p>Setiap barang yang dijual di Second Life adalah satu barang yang tidak berakhir di TPA. Ini dampak nyata komunitas kita.</p>
-    <div class="impact-grid">
-      <div class="impact-stat">
-        <div class="impact-stat-num">1.247</div>
-        <div class="impact-stat-label">barang diselamatkan</div>
-      </div>
-      <div class="impact-stat">
-        <div class="impact-stat-num">3.8 ton</div>
-        <div class="impact-stat-label">CO₂ tidak terbuang</div>
-      </div>
-      <div class="impact-stat">
-        <div class="impact-stat-num">94 juta L</div>
-        <div class="impact-stat-label">air hemat (produksi)</div>
-      </div>
-      <div class="impact-stat">
-        <div class="impact-stat-num">412</div>
-        <div class="impact-stat-label">penjual aktif</div>
-      </div>
-    </div>
-  </div>
-  <div class="personal-calc">
-    <h4>🧮 Kalau aku ikut berkontribusi...</h4>
-    <div class="calc-slider-row">
-      <label>Barang yang kamu jual</label>
-      <input type="range" min="1" max="50" step="1" value="5" id="item-slider" oninput="calcPersonal()" />
-      <span class="calc-val" id="item-val">5 barang</span>
-    </div>
-    <div class="calc-slider-row">
-      <label>Rata-rata berat (kg)</label>
-      <input type="range" min="0.1" max="20" step="0.1" value="1" id="weight-slider" oninput="calcPersonal()" />
-      <span class="calc-val" id="weight-val">1.0 kg</span>
-    </div>
-    <div class="calc-results">
-      <div class="calc-result-card amber">
-        <div class="calc-result-num" id="res-co2">15.0</div>
-        <div class="calc-result-label">kg CO₂ dicegah</div>
-      </div>
-      <div class="calc-result-card teal">
-        <div class="calc-result-num" id="res-water">375</div>
-        <div class="calc-result-label">liter air hemat</div>
-      </div>
-      <div class="calc-result-card purple">
-        <div class="calc-result-num" id="res-waste">5</div>
-        <div class="calc-result-label">kg sampah dicegah</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider" />
-
-<!-- FITUR 4: JUAL BARANG -->
-<div class="section" id="jual">
-  <div class="section-header">
-    <h2 class="section-title">Jual Barangmu</h2>
-    <span class="section-badge badge-coral">Fitur 4 — Form Simulasi</span>
-  </div>
-  <div class="form-steps" id="form-steps">
-    <div class="form-step-dot active" id="step-1-dot"><span class="step-num">1</span> Info Barang</div>
-    <div class="form-step-dot" id="step-2-dot"><span class="step-num">2</span> Kondisi</div>
-    <div class="form-step-dot" id="step-3-dot"><span class="step-num">3</span> Cerita</div>
-    <div class="form-step-dot" id="step-4-dot"><span class="step-num">4</span> Harga</div>
-  </div>
-  <div class="form-grid">
-    <div id="form-container">
-      <!-- Step 1 -->
-      <div class="form-panel" id="step-1">
-        <div class="form-field">
-          <label>Nama Barang *</label>
-          <input type="text" id="f-nama" placeholder="mis. Laptop Asus 2019" oninput="updatePreview()" />
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <div class="landing-hero-wrap">
+    <div class="hero fade-up">
+      <!-- Left column -->
+      <div>
+        <span class="hero-badge">🌍 SDG 12 · Responsible Consumption</span>
+        <h1>Barang Lama,<br><em>Cerita Baru.</em></h1>
+        <p>
+          Marketplace barang bekas yang merayakan sejarah setiap benda. Temukan barang
+          berkualitas, kurangi limbah, dan jadikan konsumsimu lebih bertanggung jawab.
+        </p>
+        <div class="hero-btns">
+          <a href="listing.html" class="btn btn-teal">🛍️ Mulai Belanja</a>
+          <a href="dampak.html"  class="btn btn-outline">📊 Lihat Dampak</a>
         </div>
-        <div class="form-field">
-          <label>Kategori *</label>
-          <select id="f-cat" onchange="updatePreview()">
-            <option value="">-- Pilih kategori --</option>
-            <option value="elektronik">📱 Elektronik</option>
-            <option value="pakaian">👕 Pakaian</option>
-            <option value="furnitur">🪑 Furnitur</option>
-            <option value="buku">📚 Buku</option>
-          </select>
-        </div>
-        <button class="submit-btn" onclick="nextStep(2)">Lanjut →</button>
+        <p style="margin-top:1.2rem; font-size:0.8rem; color:var(--text-3)">
+          1.247 barang &middot; 412 penjual &middot; 3.8 ton CO₂ dicegah
+        </p>
       </div>
-      <!-- Step 2 -->
-      <div class="form-panel" id="step-2" style="display:none;">
-        <div class="form-field">
-          <label>Kondisi Barang *</label>
-          <div class="kondisi-group">
-            <input type="radio" name="kondisi" id="k-bagus" value="Bagus" class="kondisi-radio" onchange="updatePreview()" />
-            <label for="k-bagus" class="kondisi-label">✨ Bagus</label>
-            <input type="radio" name="kondisi" id="k-layak" value="Layak" class="kondisi-radio" onchange="updatePreview()" />
-            <label for="k-layak" class="kondisi-label">👍 Layak</label>
-            <input type="radio" name="kondisi" id="k-bekas" value="Bekas" class="kondisi-radio" onchange="updatePreview()" />
-            <label for="k-bekas" class="kondisi-label">🔧 Bekas</label>
-          </div>
+
+      <!-- Right column: animated stat cards -->
+      <div class="hero-stats fade-up delay-2">
+        <div class="stat-card amber">
+          <div class="stat-num" id="stat-item">0</div>
+          <div class="stat-label">barang diselamatkan</div>
         </div>
-        <div class="form-row">
-          <button class="btn btn-outline" onclick="prevStep(1)" style="flex:1;">← Kembali</button>
-          <button class="submit-btn" onclick="nextStep(3)" style="flex:2;margin:0;">Lanjut →</button>
+        <div class="stat-card teal">
+          <div class="stat-num" id="stat-co2">0</div>
+          <div class="stat-label">kg CO₂ dicegah</div>
+        </div>
+        <div class="stat-card coral">
+          <div class="stat-num" id="stat-seller">0</div>
+          <div class="stat-label">penjual aktif</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-num" id="stat-saved">0</div>
+          <div class="stat-label">juta rupiah hemat</div>
         </div>
       </div>
-      <!-- Step 3 -->
-      <div class="form-panel" id="step-3" style="display:none;">
-        <div class="form-field">
-          <label>Cerita Barang *</label>
-          <textarea id="f-story" placeholder="Barang ini sudah menemani aku selama 3 tahun..." oninput="updatePreview()"></textarea>
-        </div>
-        <div class="form-row">
-          <button class="btn btn-outline" onclick="prevStep(2)" style="flex:1;">← Kembali</button>
-          <button class="submit-btn" onclick="nextStep(4)" style="flex:2;margin:0;">Lanjut →</button>
-        </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ KENAPA SECOND LIFE? ═══════════════════ -->
+  <section class="landing-section" style="background:var(--surface)">
+    <div class="landing-section-inner">
+      <div class="landing-section-header">
+        <span class="section-badge badge-amber">Kenapa Second Life?</span>
+        <h2>Platform yang Peduli Lebih dari Sekadar Jual-Beli</h2>
+        <p>Kami percaya setiap barang punya potensi untuk terus berguna, jauh melampaui pemilik pertamanya.</p>
       </div>
-      <!-- Step 4 -->
-      <div class="form-panel" id="step-4" style="display:none;">
-        <div class="form-field">
-          <label>Harga (Rp) *</label>
-          <input type="number" id="f-harga" placeholder="150000" min="1000" oninput="updatePreview()" />
+      <div class="benefits-grid">
+        <div class="benefit-card" style="--accent-color: var(--teal)">
+          <div class="benefit-icon">♻️</div>
+          <h3>Selamatkan Barang</h3>
+          <p>Setiap barang yang dijual di Second Life adalah satu barang yang tidak berakhir di tempat pembuangan akhir.</p>
         </div>
-        <div class="form-row">
-          <button class="btn btn-outline" onclick="prevStep(3)" style="flex:1;">← Kembali</button>
-          <button class="submit-btn" onclick="submitForm()" style="flex:2;margin:0;">🚀 Listing Sekarang!</button>
+        <div class="benefit-card" style="--accent-color: var(--amber)">
+          <div class="benefit-icon">💰</div>
+          <h3>Hemat Lebih Banyak</h3>
+          <p>Dapatkan barang berkualitas dengan harga jauh lebih terjangkau dibandingkan membeli baru.</p>
         </div>
-      </div>
-      <!-- Success -->
-      <div class="success-panel" id="success-panel">
-        <div class="success-icon">🎉</div>
-        <h3>Barangmu sudah live!</h3>
-        <p>Terima kasih sudah berkontribusi pada ekosistem yang lebih berkelanjutan.</p>
-        <div class="success-impacts" id="success-impacts"></div>
-        <button class="btn btn-teal" style="margin-top:1.5rem;" onclick="resetForm()">+ Jual Barang Lagi</button>
+        <div class="benefit-card" style="--accent-color: var(--purple)">
+          <div class="benefit-icon">📖</div>
+          <h3>Cerita di Balik Barang</h3>
+          <p>Setiap listing dilengkapi cerita dari pemilik sebelumnya — kenali barang sebelum membeli.</p>
+        </div>
       </div>
     </div>
-    <!-- PREVIEW -->
-    <div>
-      <div class="preview-label">Preview kartu produk</div>
-      <div class="preview-card" id="preview-card">
-        <div class="preview-empty">Isi form untuk melihat preview kartu produk kamu ✍️</div>
+  </section>
+
+  <!-- ═══════════════════ FEATURED PRODUCTS ═══════════════════ -->
+  <section class="landing-section">
+    <div class="landing-section-inner">
+      <div class="featured-header">
+        <h2>Barang Pilihan Saat Ini</h2>
+        <a href="listing.html">Lihat Semua →</a>
+      </div>
+      <div class="product-grid" id="featured-grid"></div>
+      <div class="featured-more">
+        <a href="listing.html" class="btn btn-outline">Lihat Semua Barang</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CARA KERJA ═══════════════════ -->
+  <div class="how-section">
+    <div class="landing-section-inner">
+      <div class="landing-section-header">
+        <span class="section-badge" style="background:rgba(255,255,255,0.2); color:#fff">Cara Kerja</span>
+        <h2>Mudah, Cepat, Berdampak</h2>
+        <p>Tiga langkah untuk mulai berkontribusi pada ekosistem yang lebih berkelanjutan.</p>
+      </div>
+      <div class="how-it-works">
+        <div class="how-step">
+          <div class="how-step-num" style="background:var(--amber)">01</div>
+          <h3>Temukan Barang</h3>
+          <p>Jelajahi ratusan listing dari penjual terpercaya di komunitasmu. Filter berdasarkan kategori, harga, dan kondisi.</p>
+        </div>
+        <div class="how-connector"></div>
+        <div class="how-step">
+          <div class="how-step-num" style="background:rgba(255,255,255,0.25)">02</div>
+          <h3>Hubungi Penjual</h3>
+          <p>Setiap barang punya cerita — kenali produk dari pemilik sebelumnya sebelum memutuskan untuk membeli.</p>
+        </div>
+        <div class="how-connector"></div>
+        <div class="how-step">
+          <div class="how-step-num" style="background:var(--coral)">03</div>
+          <h3>Beli &amp; Berdampak</h3>
+          <p>Setiap transaksi mencegah sampah dan menghemat CO₂ serta sumber daya produksi barang baru.</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<footer>
-  <p><strong>Second Life Marketplace</strong></p>
-  <p>Dibuat untuk SDG 12 — Responsible Consumption & Production · Malang, Indonesia</p>
-</footer>
+  <!-- ═══════════════════ IMPACT NUMBERS ═══════════════════ -->
+  <section class="landing-section" style="background:var(--surface)">
+    <div class="landing-section-inner">
+      <div class="landing-section-header">
+        <span class="section-badge badge-teal">Dampak Nyata</span>
+        <h2>Dampak Nyata Komunitas Kita 🌱</h2>
+        <p>Angka ini bukan sekadar statistik — ini adalah jejak nyata kontribusi bersama.</p>
+      </div>
+      <div class="impact-numbers-grid">
+        <div class="impact-num-card">
+          <div class="impact-num">1.247</div>
+          <div class="impact-num-label">Barang diselamatkan</div>
+        </div>
+        <div class="impact-num-card">
+          <div class="impact-num" style="color:var(--amber)">3.8 ton</div>
+          <div class="impact-num-label">CO₂ tidak terbuang</div>
+        </div>
+        <div class="impact-num-card">
+          <div class="impact-num" style="color:var(--purple)">94 jt L</div>
+          <div class="impact-num-label">Air produksi dihemat</div>
+        </div>
+        <div class="impact-num-card">
+          <div class="impact-num" style="color:var(--coral)">412</div>
+          <div class="impact-num-label">Penjual aktif</div>
+        </div>
+      </div>
+      <div class="impact-numbers-cta">
+        <a href="dampak.html" class="btn btn-teal">Lihat Dampak Selengkapnya →</a>
+      </div>
+    </div>
+  </section>
 
-<script src="script.js"></script>
+  <!-- ═══════════════════ CTA BANNER ═══════════════════ -->
+  <div class="cta-banner">
+    <span class="section-badge" style="background:rgba(245,158,11,0.2); color:var(--amber)">Siap Berkontribusi?</span>
+    <h2>Punya Barang yang Ingin Kamu Jual?</h2>
+    <p>Mulai listing gratis dalam hitungan menit. Setiap barang punya cerita baru yang menunggu untuk dimulai.</p>
+    <div class="btn-group">
+      <a href="jual.html" class="btn-amber">Jual Barang Sekarang</a>
+      <a href="tentang.html" class="btn-white-outline">Pelajari Cara Kerja</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <strong>Second Life Marketplace</strong>
+      </div>
+      <nav class="footer-links">
+        <a href="listing.html">Temukan Barang</a>
+        <a href="search.html">Cari Barang</a>
+        <a href="dampak.html">Dampak</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="jual.html">Jual Barang</a>
+        <a href="tentang.html">Tentang Kami</a>
+      </nav>
+      <p class="footer-copy">Dibuat untuk SDG 12 &middot; Responsible Consumption &amp; Production &middot; Malang, Indonesia</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        animateCount('stat-item',   1247);
+        animateCount('stat-co2',    3800, ' kg');
+        animateCount('stat-seller', 412);
+        animateCount('stat-saved',  284, ' jt');
+      }, 300);
+      renderProducts(products.slice(0, 4), 'featured-grid');
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cari Barang — Second Life Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="search">
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-dot"></span>Second Life
+    </a>
+    <ul class="nav-links">
+      <li><a href="listing.html" class="nav-link" data-page="listing">Temukan Barang</a></li>
+      <li><a href="search.html"  class="nav-link" data-page="search">Cari Barang</a></li>
+      <li><a href="dampak.html"  class="nav-link" data-page="dampak">Dampak</a></li>
+      <li><a href="kalkulator.html" class="nav-link" data-page="kalkulator">Kalkulator</a></li>
+      <li><a href="tentang.html" class="nav-link" data-page="tentang">Tentang</a></li>
+    </ul>
+    <a href="jual.html" class="nav-cta">+ Jual Barang</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <span class="section-badge badge-teal">Fitur 2 — Search &amp; Filter</span>
+    <h1>Cari Barang</h1>
+    <p>Temukan barang yang kamu cari dengan filter harga, kondisi, dan kata kunci.</p>
+  </div>
+
+  <!-- SEARCH SECTION -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Search + Sort -->
+      <div class="search-bar">
+        <input type="text" id="search-input" class="search-input" placeholder="Cari nama atau cerita barang…" oninput="runSearch()" />
+        <select id="sort-select" class="sort-select" onchange="runSearch()">
+          <option value="terbaru">Terbaru</option>
+          <option value="termurah">Termurah</option>
+          <option value="termahal">Termahal</option>
+          <option value="dampak">Dampak Tertinggi</option>
+        </select>
+      </div>
+
+      <!-- Filter row -->
+      <div class="filter-row">
+        <div class="price-filter">
+          <label class="filter-label">Harga maks: <span id="price-label">Rp 1.000.000</span></label>
+          <input type="range" id="price-range" class="price-range" min="10000" max="1000000" value="1000000" step="10000"
+                 oninput="updatePriceLabel(); runSearch()" />
+        </div>
+        <div class="cond-filter">
+          <span class="filter-label">Kondisi:</span>
+          <button class="cond-btn active" onclick="toggleCond('semua', this)">Semua</button>
+          <button class="cond-btn" onclick="toggleCond('Bagus', this)">✨ Bagus</button>
+          <button class="cond-btn" onclick="toggleCond('Layak', this)">👍 Layak</button>
+          <button class="cond-btn" onclick="toggleCond('Bekas', this)">🔧 Bekas</button>
+        </div>
+      </div>
+
+      <!-- Results grid -->
+      <div class="product-grid" id="search-grid"></div>
+      <div id="search-empty" class="empty-state" style="display:none">
+        <div class="empty-icon">🙁</div>
+        <div class="empty-text">Tidak ada barang yang cocok</div>
+        <div class="empty-sub">Coba ubah kata kunci atau filter pencarian</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <strong>Second Life Marketplace</strong>
+      </div>
+      <nav class="footer-links">
+        <a href="listing.html">Temukan Barang</a>
+        <a href="search.html">Cari Barang</a>
+        <a href="dampak.html">Dampak</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="jual.html">Jual Barang</a>
+        <a href="tentang.html">Tentang Kami</a>
+      </nav>
+      <p class="footer-copy">Dibuat untuk SDG 12 &middot; Responsible Consumption &amp; Production &middot; Malang, Indonesia</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

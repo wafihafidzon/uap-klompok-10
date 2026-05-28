@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jual Barang — Second Life Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="jual">
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-dot"></span>Second Life
+    </a>
+    <ul class="nav-links">
+      <li><a href="listing.html" class="nav-link" data-page="listing">Temukan Barang</a></li>
+      <li><a href="search.html"  class="nav-link" data-page="search">Cari Barang</a></li>
+      <li><a href="dampak.html"  class="nav-link" data-page="dampak">Dampak</a></li>
+      <li><a href="kalkulator.html" class="nav-link" data-page="kalkulator">Kalkulator</a></li>
+      <li><a href="tentang.html" class="nav-link" data-page="tentang">Tentang</a></li>
+    </ul>
+    <a href="jual.html" class="nav-cta">+ Jual Barang</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <span class="section-badge badge-coral">Fitur 4 — Form Simulasi</span>
+    <h1>Jual Barangmu</h1>
+    <p>Isi formulir berikut untuk mulai listing barang bekasmu dan berdampak bagi lingkungan.</p>
+  </div>
+
+  <!-- SELL FORM -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Step dots -->
+      <div class="form-steps" id="form-steps">
+        <div class="form-step-dot active" id="step-1-dot"><span class="step-num">1</span> Info Barang</div>
+        <div class="form-step-dot" id="step-2-dot"><span class="step-num">2</span> Kondisi</div>
+        <div class="form-step-dot" id="step-3-dot"><span class="step-num">3</span> Cerita</div>
+        <div class="form-step-dot" id="step-4-dot"><span class="step-num">4</span> Harga</div>
+      </div>
+
+      <!-- Form + Preview -->
+      <div class="form-grid">
+        <div id="form-container">
+
+          <!-- Step 1 -->
+          <div class="form-panel" id="step-1">
+            <div class="form-field">
+              <label>Nama Barang *</label>
+              <input type="text" id="f-nama" placeholder="mis. Laptop Asus 2019" oninput="updatePreview()" />
+            </div>
+            <div class="form-field">
+              <label>Kategori *</label>
+              <select id="f-cat" onchange="updatePreview()">
+                <option value="">-- Pilih kategori --</option>
+                <option value="elektronik">📱 Elektronik</option>
+                <option value="pakaian">👕 Pakaian</option>
+                <option value="furnitur">🪑 Furnitur</option>
+                <option value="buku">📚 Buku</option>
+              </select>
+            </div>
+            <button class="submit-btn" onclick="nextStep(2)">Lanjut →</button>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="form-panel" id="step-2" style="display:none">
+            <div class="form-field">
+              <label>Kondisi Barang *</label>
+              <div class="kondisi-group">
+                <input type="radio" name="kondisi" id="k-bagus" value="Bagus" class="kondisi-radio" onchange="updatePreview()" />
+                <label for="k-bagus" class="kondisi-label">✨ Bagus</label>
+                <input type="radio" name="kondisi" id="k-layak" value="Layak" class="kondisi-radio" onchange="updatePreview()" />
+                <label for="k-layak" class="kondisi-label">👍 Layak</label>
+                <input type="radio" name="kondisi" id="k-bekas" value="Bekas" class="kondisi-radio" onchange="updatePreview()" />
+                <label for="k-bekas" class="kondisi-label">🔧 Bekas</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <button class="btn btn-outline" onclick="prevStep(1)" style="flex:1">← Kembali</button>
+              <button class="submit-btn" onclick="nextStep(3)" style="flex:2;margin:0">Lanjut →</button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="form-panel" id="step-3" style="display:none">
+            <div class="form-field">
+              <label>Cerita Barang *</label>
+              <textarea id="f-story" placeholder="Barang ini sudah menemani aku selama 3 tahun..." oninput="updatePreview()"></textarea>
+            </div>
+            <div class="form-row">
+              <button class="btn btn-outline" onclick="prevStep(2)" style="flex:1">← Kembali</button>
+              <button class="submit-btn" onclick="nextStep(4)" style="flex:2;margin:0">Lanjut →</button>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="form-panel" id="step-4" style="display:none">
+            <div class="form-field">
+              <label>Harga (Rp) *</label>
+              <input type="number" id="f-harga" placeholder="150000" min="1000" oninput="updatePreview()" />
+            </div>
+            <div class="form-row">
+              <button class="btn btn-outline" onclick="prevStep(3)" style="flex:1">← Kembali</button>
+              <button class="submit-btn" onclick="submitForm()" style="flex:2;margin:0">🚀 Listing Sekarang!</button>
+            </div>
+          </div>
+
+          <!-- Success panel -->
+          <div class="success-panel" id="success-panel">
+            <div class="success-icon">🎉</div>
+            <h3>Barangmu sudah live!</h3>
+            <p>Terima kasih sudah berkontribusi pada ekosistem yang lebih berkelanjutan.</p>
+            <div class="success-impacts" id="success-impacts"></div>
+            <button class="btn btn-teal" style="margin-top:1.5rem" onclick="resetForm()">+ Jual Barang Lagi</button>
+          </div>
+
+        </div>
+
+        <!-- Live preview -->
+        <div>
+          <div class="preview-label">Preview kartu produk</div>
+          <div class="preview-card" id="preview-card">
+            <div class="preview-empty">Isi form untuk melihat preview kartu produk kamu ✍️</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <strong>Second Life Marketplace</strong>
+      </div>
+      <nav class="footer-links">
+        <a href="listing.html">Temukan Barang</a>
+        <a href="search.html">Cari Barang</a>
+        <a href="dampak.html">Dampak</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="jual.html">Jual Barang</a>
+        <a href="tentang.html">Tentang Kami</a>
+      </nav>
+      <p class="footer-copy">Dibuat untuk SDG 12 &middot; Responsible Consumption &amp; Production &middot; Malang, Indonesia</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/jual.js"></script>
+</body>
+</html>

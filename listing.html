@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temukan Barang — Second Life Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="listing">
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-dot"></span>Second Life
+    </a>
+    <ul class="nav-links">
+      <li><a href="listing.html" class="nav-link" data-page="listing">Temukan Barang</a></li>
+      <li><a href="search.html"  class="nav-link" data-page="search">Cari Barang</a></li>
+      <li><a href="dampak.html"  class="nav-link" data-page="dampak">Dampak</a></li>
+      <li><a href="kalkulator.html" class="nav-link" data-page="kalkulator">Kalkulator</a></li>
+      <li><a href="tentang.html" class="nav-link" data-page="tentang">Tentang</a></li>
+    </ul>
+    <a href="jual.html" class="nav-cta">+ Jual Barang</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <span class="section-badge badge-amber">Fitur 1 — Listing &amp; Storytelling</span>
+    <h1>Temukan Barang</h1>
+    <p>Jelajahi koleksi barang bekas berkualitas dari komunitas kami. Setiap barang punya cerita.</p>
+  </div>
+
+  <!-- LISTING SECTION -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Category filter -->
+      <div class="filter-bar" id="cat-tabs">
+        <button class="filter-tab active" onclick="filterCat('semua', this)">Semua</button>
+        <button class="filter-tab" onclick="filterCat('elektronik', this)">📱 Elektronik</button>
+        <button class="filter-tab" onclick="filterCat('pakaian', this)">👕 Pakaian</button>
+        <button class="filter-tab" onclick="filterCat('furnitur', this)">🪑 Furnitur</button>
+        <button class="filter-tab" onclick="filterCat('buku', this)">📚 Buku</button>
+      </div>
+
+      <!-- Product grid -->
+      <div class="product-grid" id="product-grid"></div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <strong>Second Life Marketplace</strong>
+      </div>
+      <nav class="footer-links">
+        <a href="listing.html">Temukan Barang</a>
+        <a href="search.html">Cari Barang</a>
+        <a href="dampak.html">Dampak</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="jual.html">Jual Barang</a>
+        <a href="tentang.html">Tentang Kami</a>
+      </nav>
+      <p class="footer-copy">Dibuat untuk SDG 12 &middot; Responsible Consumption &amp; Production &middot; Malang, Indonesia</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/listing.js"></script>
+</body>
+</html>
