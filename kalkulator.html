@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator Dampak — Second Life Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="kalkulator">
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-dot"></span>Second Life
+    </a>
+    <ul class="nav-links">
+      <li><a href="listing.html" class="nav-link" data-page="listing">Temukan Barang</a></li>
+      <li><a href="search.html"  class="nav-link" data-page="search">Cari Barang</a></li>
+      <li><a href="dampak.html"  class="nav-link" data-page="dampak">Dampak</a></li>
+      <li><a href="kalkulator.html" class="nav-link" data-page="kalkulator">Kalkulator</a></li>
+      <li><a href="tentang.html" class="nav-link" data-page="tentang">Tentang</a></li>
+    </ul>
+    <a href="jual.html" class="nav-cta">+ Jual Barang</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <span class="section-badge badge-purple">Kalkulator Pribadi</span>
+    <h1>Kalkulator Dampak</h1>
+    <p>Geser slider untuk menghitung berapa banyak dampak lingkungan yang bisa kamu berikan.</p>
+  </div>
+
+  <!-- CALCULATOR -->
+  <section class="section">
+    <div class="container">
+      <div class="personal-calc">
+
+        <!-- Sliders -->
+        <div class="calc-sliders">
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Barang yang kamu jual</span>
+              <span id="item-val" class="slider-val">5 barang</span>
+            </div>
+            <input type="range" id="item-slider" min="1" max="50" value="5" oninput="calcPersonal()" />
+            <div class="slider-range-hint"><span>1</span><span>50 barang</span></div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Rata-rata berat per barang</span>
+              <span id="weight-val" class="slider-val">1.0 kg</span>
+            </div>
+            <input type="range" id="weight-slider" min="0.1" max="20" step="0.1" value="1" oninput="calcPersonal()" />
+            <div class="slider-range-hint"><span>0.1 kg</span><span>20 kg</span></div>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="calc-results">
+          <div class="calc-result-card" style="background:var(--teal-light)">
+            <div class="calc-result-icon">🌿</div>
+            <div class="calc-result-num" id="res-co2" style="color:var(--teal)">15.0</div>
+            <div class="calc-result-label">kg CO₂ dicegah</div>
+          </div>
+          <div class="calc-result-card" style="background:var(--amber-light)">
+            <div class="calc-result-icon">💧</div>
+            <div class="calc-result-num" id="res-water" style="color:var(--amber)">375</div>
+            <div class="calc-result-label">Liter air hemat</div>
+          </div>
+          <div class="calc-result-card" style="background:var(--purple-light)">
+            <div class="calc-result-icon">♻️</div>
+            <div class="calc-result-num" id="res-waste" style="color:var(--purple)">5</div>
+            <div class="calc-result-label">kg sampah dicegah</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Methodology -->
+      <details class="methodology-box">
+        <summary>📊 Bagaimana kami menghitung ini?</summary>
+        <p>
+          <strong>CO₂ dicegah:</strong> Jumlah barang × berat rata-rata × 3 kg CO₂/kg. Faktor 3 kg
+          merupakan estimasi rata-rata emisi yang dihasilkan selama produksi barang baru.<br><br>
+          <strong>Air hemat:</strong> Jumlah barang × berat × 75 liter/kg. Angka ini mencerminkan
+          air virtual yang digunakan dalam rantai produksi manufaktur.<br><br>
+          <strong>Sampah dicegah:</strong> Jumlah barang × berat (kg). Asumsi sederhana bahwa
+          setiap kilogram barang bekas yang dijual kembali tidak berakhir di tempat pembuangan akhir.
+        </p>
+      </details>
+
+      <!-- CTA -->
+      <div style="text-align:center; margin-top:2.5rem">
+        <p style="color:var(--text-2); margin-bottom:1rem; font-size:0.9rem">
+          Siap berkontribusi nyata? Mulai listing barang bekasmu sekarang.
+        </p>
+        <a href="jual.html" class="btn btn-teal">Jual Barang Sekarang →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <strong>Second Life Marketplace</strong>
+      </div>
+      <nav class="footer-links">
+        <a href="listing.html">Temukan Barang</a>
+        <a href="search.html">Cari Barang</a>
+        <a href="dampak.html">Dampak</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="jual.html">Jual Barang</a>
+        <a href="tentang.html">Tentang Kami</a>
+      </nav>
+      <p class="footer-copy">Dibuat untuk SDG 12 &middot; Responsible Consumption &amp; Production &middot; Malang, Indonesia</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/kalkulator.js"></script>
+</body>
+</html>

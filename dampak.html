@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dampak Komunitas — Second Life Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="dampak">
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-dot"></span>Second Life
+    </a>
+    <ul class="nav-links">
+      <li><a href="listing.html" class="nav-link" data-page="listing">Temukan Barang</a></li>
+      <li><a href="search.html"  class="nav-link" data-page="search">Cari Barang</a></li>
+      <li><a href="dampak.html"  class="nav-link" data-page="dampak">Dampak</a></li>
+      <li><a href="kalkulator.html" class="nav-link" data-page="kalkulator">Kalkulator</a></li>
+      <li><a href="tentang.html" class="nav-link" data-page="tentang">Tentang</a></li>
+    </ul>
+    <a href="jual.html" class="nav-cta">+ Jual Barang</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <span class="section-badge badge-teal">Fitur 3 — Impact Tracker</span>
+    <h1>Dampak Komunitas</h1>
+    <p>Bersama-sama kita telah memberikan dampak nyata bagi lingkungan dan komunitas.</p>
+  </div>
+
+  <!-- IMPACT HERO -->
+  <section class="section">
+    <div class="container">
+      <div class="impact-hero">
+        <div class="impact-hero-content">
+          <span class="section-badge badge-teal">🌍 Dampak Nyata</span>
+          <h2>Setiap Transaksi Berarti</h2>
+          <p>
+            Di Second Life, setiap barang yang dijual bukan sekadar uang — melainkan langkah nyata
+            mengurangi limbah, menekan emisi karbon, dan menjaga sumber daya alam. Inilah dampak
+            kolektif komunitas kita hingga hari ini.
+          </p>
+        </div>
+
+        <!-- Community stats -->
+        <div class="impact-grid">
+          <div class="impact-stat">
+            <div class="impact-num" id="stat-item2">0</div>
+            <div class="impact-stat-label">Barang diselamatkan</div>
+          </div>
+          <div class="impact-stat">
+            <div class="impact-num" id="stat-co22">0 kg</div>
+            <div class="impact-stat-label">CO₂ tidak terbuang</div>
+          </div>
+          <div class="impact-stat">
+            <div class="impact-num" id="stat-water">0</div>
+            <div class="impact-stat-label">Juta liter air hemat</div>
+          </div>
+          <div class="impact-stat">
+            <div class="impact-num" id="stat-seller2">0</div>
+            <div class="impact-stat-label">Penjual aktif</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL CARDS -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem; margin-bottom:2.5rem">
+
+        <div class="stat-card" style="border-top-color: var(--teal)">
+          <div class="stat-icon">♻️</div>
+          <div class="stat-label">Barang Diselamatkan dari TPA</div>
+          <div class="stat-value" style="color:var(--teal)">1.247</div>
+          <div class="stat-sub">Barang yang menemukan pemilik baru</div>
+        </div>
+
+        <div class="stat-card" style="border-top-color: var(--amber)">
+          <div class="stat-icon">🌿</div>
+          <div class="stat-label">CO₂ Dicegah</div>
+          <div class="stat-value" style="color:var(--amber)">3.8 ton</div>
+          <div class="stat-sub">Emisi karbon yang tidak terjadi</div>
+        </div>
+
+        <div class="stat-card" style="border-top-color: var(--purple)">
+          <div class="stat-icon">💧</div>
+          <div class="stat-label">Air Produksi Dihemat</div>
+          <div class="stat-value" style="color:var(--purple)">94 jt L</div>
+          <div class="stat-sub">Setara 37 kolam renang olimpik</div>
+        </div>
+
+        <div class="stat-card" style="border-top-color: var(--coral)">
+          <div class="stat-icon">👥</div>
+          <div class="stat-label">Penjual Aktif</div>
+          <div class="stat-value" style="color:var(--coral)">412</div>
+          <div class="stat-sub">Komunitas yang terus bertumbuh</div>
+        </div>
+
+      </div>
+
+      <!-- CTA ke kalkulator -->
+      <div style="text-align:center; background:var(--teal-light); border-radius:var(--radius); padding:2.5rem 2rem">
+        <span class="section-badge badge-teal">Kalkulator Pribadi</span>
+        <h3 style="font-family:'Guton',sans-serif; font-weight:800; font-size:1.5rem; margin:0.75rem 0 0.5rem; color:var(--text)">
+          Ingin Tahu Dampak Pribadimu?
+        </h3>
+        <p style="color:var(--text-2); font-size:0.9rem; margin-bottom:1.5rem; max-width:420px; margin-left:auto; margin-right:auto">
+          Gunakan kalkulator kami untuk mengetahui berapa CO₂, air, dan sampah yang bisa kamu cegah
+          dengan menjual barang bekasmu.
+        </p>
+        <a href="kalkulator.html" class="btn btn-teal">Hitung Dampakku →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-dot"></span>
+        <strong>Second Life Marketplace</strong>
+      </div>
+      <nav class="footer-links">
+        <a href="listing.html">Temukan Barang</a>
+        <a href="search.html">Cari Barang</a>
+        <a href="dampak.html">Dampak</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="jual.html">Jual Barang</a>
+        <a href="tentang.html">Tentang Kami</a>
+      </nav>
+      <p class="footer-copy">Dibuat untuk SDG 12 &middot; Responsible Consumption &amp; Production &middot; Malang, Indonesia</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        animateCount('stat-item2', 1247);
+        animateCount('stat-co22', 3800, ' kg');
+        animateCount('stat-water', 94);
+        animateCount('stat-seller2', 412);
+      }, 300);
+    });
+  </script>
+</body>
+</html>
